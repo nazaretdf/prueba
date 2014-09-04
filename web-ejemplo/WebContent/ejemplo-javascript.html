@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+			<title>Ejemplo de JavaScript</title>
+		</head>
+		<!-- Se mete aquí -->
+		<!-- el cógigo se ve no se compila, no hay definición de tipos
+		son todo variables, solo se interpreta -->
+		<script type="text/javascript">
+			// claves y valores
+		function test3ArraysAsociativos(){
+			var x = {
+					"a":7,
+					"b": "Hola",
+					// se puede poner con comillas o con el nombre de la variable
+					c: {
+						// los números se tienen que poner entre comillas xq no son una variable
+						"0": "Elemento",
+						"1": false
+					} 
+					
+			};
+			document.write(x + " que es de tipo "+ typeof(x)); //[object Object]
+			document.write("Pero se comporta como array "+ x["a"]); // accedo a la posición "a" y 
+															// me devuelve 7
+		
+			document.write("Pero se comporta como array "+ x["c"][0]); //Elemento
+			
+			document.write("y admite notación de objetos " + x.b ); // Hola
+			// no se puede poner x.c.0 se tendría que poner x.c[0]
+			// solo puedo String y NO números
+			//document.write("HOLAAAAAA");
+			}
+			function test2Tipos(){
+			 alert(typeof(3)     +" es un 3"); 		// number
+			alert(typeof("Hola")+" es un texto"); 	// string
+			alert(typeof(4.7)	+" es un 4.7"); 	// number
+			alert(typeof('a')	+" es un caracter");// string
+			alert(typeof(true)	+" es un true"); 	// boolean
+			alert(typeof(null)	+" es un null"); 	// object
+			alert(typeof(x)		+" es una variable"); // undefined
+			alert(typeof([])	+" es un array[]"); // object
+			alert(typeof({})	+" es un mapa{}"); // object 
+			// function tambien es otro tipo de datos
+			
+			}
+			function test1(){
+			/* var x, y, z;
+			x=3;
+			y ="Hola";
+			z = false;
+			
+			x='a';
+			y = 7.8;
+			z = [3,6,9];
+			
+			alert("Valores: " + x + y + z);
+			// aunq el tipo z de Object Javascript no es un lenguaje orientado a objetos
+			// le llama Object porq es una estructura que simula los objetos
+			alert("Tipos: " + typeof(x) + ', ' + typeof(y) + ', '+ typeof(z));
+			
+			var a=7;
+			var b="7";
+			// no hay tipos x lo que compara el contenido y sale igual
+			if(a==b) alert("iguales");
+			else 	 alert("distintos");
+			
+			// superigual, con este compara tambien el tipo y sale distinto
+			if(a===b) alert("iguales");
+			else 	 alert("distintos"); 
+			*/
+			}
+			
+			// Invocar
+			//test3ArraysAsociativos();
+			//alert("uno");
+			
+			function y(nombre, edad){
+				
+				// si nombre es distinto de falso pone el valor
+				// si es falso pone "Defecto"
+				nombre = nombre || "Defecto";
+				if(edad != 0){
+					edad = edad || 0;
+				}
+				 // Los parametros van en un array a parte
+				 alert(arguments[2] + arguments[3]);
+				
+				
+				/* nombre = (nombre) ? "Defecto" : nombre;
+				edad = (edad) ? 0 : edad; */
+				
+				
+				/* nombre = (nombre == undefined) ? "Defecto" : nombre;
+				edad = (edad == undefined) ? 0 : edad; */
+				
+				/* if(nombre == undefined){
+					nombre = "Defecto";
+				}
+				if(edad == undefined){
+					edad = 0;
+				} */
+				
+				return "Hola "+ nombre + "tienes " + edad + " años";
+				
+				
+			}
+			function test4Funciones(){
+				
+			}
+			//alert(y);
+			//alert(y("",0,23,"Hola"));
+			
+			//alert(typeof(test3ArraysAsociativos));
+			
+			
+			function ambitos (){
+				// VAMOS A PROBAR EL AMBITO DE LAS VARIABLES
+				x = 5;
+				var y = 9;
+				function f(){
+					alert(x + " " + y);
+					var x = "Hola";
+					var y = "Adios"
+					alert(x + " " + y);
+				}
+				
+				f();
+				alert(x + " " + y);
+			}
+			
+			function dom(){
+				alert(document.body.innerHTML);
+				document.body.innerHTML +="<b>HOLAAA<b/>";
+				//document.body.innerHTML +='<img alt="Leo Harlem" src="http://www.mpcmanagement.es/wp-content/uploads/2013/12/correrharm.jpg" width="200"/>';
+				
+				// creamos un nodo <img>
+				var imagen = document.createElement("img");
+				imagen.alt="Leo Harlem";
+				imagen.src="http://www.mpcmanagement.es/wp-content/uploads/2013/12/correrharm.jpg";
+				imagen.width="300";
+				imagen.onmouseover =function(){
+					var caja = document.getElementById("caja");
+					caja.value = "dentro";
+				};
+				imagen.onmouseout = function (){
+					var caja = document.getElementsByName("x")[0];
+					caja.value = "fuera";
+				};
+				// Pero esto no está dentro del documento
+				// Lo voy a añadir al body, al final
+				document.body.appendChild(imagen);
+				
+				var input = document.createElement("input");
+				//input.type="button";
+				input.value ="Pulsame NAZA";
+				// no puede haber dos etiquetas con el mismo id
+				input.id ="caja";
+				input.name = "x";
+				input.onclick = function (){
+					alert("Hola");
+				};
+				document.body.appendChild(input);
+			}
+			
+			function pintarReloj(){
+				// voy a pintar un reloj en la página
+				var p = document.getElementById("reloj");
+				var fecha = new Date();
+				p.innerHTML = fecha.toTimeString();
+			}
+			
+			function iniciarReloj(){
+				// primer parametro es una función y el segundo es un número
+				// va a ejecutar esa función cada cierto tiempo lo que diga el segundo
+				// parámetro
+				// se pone la función sin parentesis
+				// CADA SEGUNDO SE EJECUTA LA FUNCIÓN pintarReloj()
+				idInterval = setInterval(pintarReloj,1000);
+			}
+			
+			// EXISTE LA FUNCIÓN setTimeout QUE RETRASA UNA EJECUCIÓN
+			var idTimeout = setTimeout(iniciarReloj, 2000);
+			
+			function parar(){
+				clearTimeout(idTimeout);
+				clearInterval(idInterval);
+			}
+			
+			setTimeout(parar, 5000);
+			
+			// DADO QUE SE PUEDEN EJECUTAR FUNCIONES
+			// las funciones son como variables si le pongo los parentesis se ejecuta
+			// ponerle o no parámetros es opcional
+			function  operar(x,y,operacion, error){
+				// los dos ultimos parámetros son funciones
+				try {
+					operacion(x,y);
+				} catch (e) {
+					error(e)
+				}
+				
+			}
+			function excepcion(e){
+				alert("Se ha producido una excepción " + e);
+			}
+			function mensaje(){
+				alert("Hola " + arguments[0]);
+			}
+			
+			function sumar(x,y){
+				if(isNaN(x) || isNaN(y)){
+					throw new Error("Tiene que ser enteros");
+				}
+			return x+y;}
+			
+			function dividir(x,y){
+				var r = x/y;
+				if (isNaN(r)){
+					throw new Error("NaN");
+				}
+			return r;}
+			
+		</script>
+		
+		
+		
+	<body>
+	<p>
+		<input id="x"/><input id="y"/>
+		<br/>
+		<input type="button" value="Sumar" onclick="operar('b',4,sumar,mensaje)" />
+		<input type="button" value="Dividir" onclick="operar(0,0, dividir, excepcion)" />	
+	</p>
+	
+	
+	El body contiene un botón
+	<br/>
+		<input type="button"  value="Click"  onclick="dom()">
+	<br/>
+	Púlsalo y verás
+	<p id="reloj">aquí se va a pintar la fecha y hora</p>
+	
+	</body>
+</html>
