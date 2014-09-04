@@ -14,7 +14,7 @@ import javax.ws.rs.QueryParam;
 // JERSEY ES UNA VERSIÓN DE JAX-RS
 // PERO   SE CONFIGURA CON ANOTACIONES
 
-@Path("/")
+@Path("/") 
 public class ServicioREST {
 	public ServicioREST() {
 		
